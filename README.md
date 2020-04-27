@@ -8,6 +8,15 @@ Yesterday, we learned to create folders, files, and print their content to the t
 curl http://rcs.bu.edu/examples/python/data_analysis/flights.csv -o flights.csv
 ```
 
+Hint: Anytime you want to learn more about the executable in the terminal, you can run, for example 
+```
+man cat 
+```
+or 
+```
+man head
+```
+
 ### Now, perform some initial data exploration with the following commands:
 
     cat flights.csv
@@ -36,3 +45,79 @@ curl http://rcs.bu.edu/examples/python/data_analysis/flights.csv -o flights.csv
 '''
 
 ```
+
+### Now test out this command, and explore the difference between the two.
+
+    cat flights.csv| cut -d, -f12 | tail -n +2 | sort| uniq -c | sort -r -n | head -n10 
+
+
+```python
+"""
+1. everything is the same as before up to uniq -c
+2. uniq -c counts the number of each unique value
+3. sort -r -n sorts the values in reverse numerically.  Without -n, the numerical sort would be wonky.
+4. Head -n10 outputs the top 10 counts.
+"""
+```
+
+### Next, use similar methods to gather these data sets and answer the associated questions.
+
+    https://raw.githubusercontent.com/vega/vega/master/docs/data/sp500.csv
+    
+    What is the highest price reached of the sp500? What is the lowest price reached?     
+    
+
+
+
+```python
+"""
+high: 1549.38
+cat sp500.csv | cut -d, -f2 | sort -r -n | head -n1
+
+low: 735.09 
+500.csv | cut -d, -f2 | sort -r -n | tail -n2
+
+"""
+```
+
+```
+https://raw.githubusercontent.com/vega/datalib/master/test/data/stocks.csv
+
+How many observations of each unique stock?
+``` 
+
+
+
+```python
+"""
+68 GOOG
+123 AAPL
+123 AMZN
+123 IBM
+123 MSFT
+ 
+cat stocks.csv | cut -d, -f1|uniq -c|sort -n
+
+"""
+```
+
+```       
+    http://www.gutenberg.org/cache/epub/5200/pg5200.txt
+    
+    What are the most common words and their counts?
+    hint: use   tr " " "\n"  to break out words on their own line
+```
+
+
+```python
+"""
+cat pg5200.txt | tr " " "\n"| sort|uniq -c|sort -r -n|head
+"""
+```
+
+
+
+
+    '\ncat pg5200.txt | tr " " "\n"| sort|uniq -c|sort -r -n|head\n'
+
+
